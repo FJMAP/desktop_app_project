@@ -1,0 +1,50 @@
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StockManagerApp.src.Views.ProductView"
+             xmlns:viewModels="clr-namespace:StockManagerApp.src.ViewModels">
+    <ContentView.BindingContext>
+        <viewModels:ProductViewModel/>
+    </ContentView.BindingContext>
+    <StackLayout>
+        <ListView ItemsSource="{Binding Products}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Text="{Binding ID}"  
+                               FontSize="16" 
+                               FontAttributes="Bold"
+                               Grid.Row="0"
+                               Grid.Column="0" />
+                            <Label Text="{Binding Name}"  
+                               FontSize="16" 
+                               FontAttributes="Bold" 
+                               Grid.Row="0" 
+                               Grid.Column="1" />
+                            <Label Text="{Binding Price, StringFormat='Price: {0:C}'}"
+                               Grid.Row="0"
+                               Grid.Column="2" 
+                               FontSize="16"
+                               FontAttributes="Bold"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackLayout Orientation="Horizontal" 
+                     HorizontalOptions="Start"
+                     VerticalOptions="CenterAndExpand">
+            <Button Margin="10,0" Text="Calculate Total" Command="{Binding CalculateTotalCommand}" />
+            <Label Margin="10" Text="{Binding TotalPrice, StringFormat='Total Price: {0:C}'}" FontSize="18" />
+        </StackLayout>
+    </StackLayout>
+</ContentView>
